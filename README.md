@@ -1,32 +1,30 @@
 <div id="top"></div>
 
-[![Contributors](https://img.shields.io/github/contributors/texttree/template-rcl.svg?style=for-the-badge)](https://github.com/texttree/template-rcl/graphs/contributors)
-[![Forks](https://img.shields.io/github/forks/texttree/template-rcl.svg?style=for-the-badge)](https://github.com/texttree/template-rcl/network/members)
-[![Stargazers](https://img.shields.io/github/stars/texttree/template-rcl.svg?style=for-the-badge)](https://github.com/texttree/template-rcl/stargazers)
-[![Issues](https://img.shields.io/github/issues/texttree/template-rcl.svg?style=for-the-badge)](https://github.com/texttree/template-rcl/issues)
-[![MIT License](https://img.shields.io/github/license/texttree/template-rcl.svg?style=for-the-badge)](https://github.com/texttree/template-rcl/blob/master/LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/texttree/translation-words-helpers.svg?style=for-the-badge)](https://github.com/texttree/translation-words-helpers/graphs/contributors)
+[![Forks](https://img.shields.io/github/forks/texttree/translation-words-helpers.svg?style=for-the-badge)](https://github.com/texttree/translation-words-helpers/network/members)
+[![Stargazers](https://img.shields.io/github/stars/texttree/translation-words-helpers.svg?style=for-the-badge)](https://github.com/texttree/translation-words-helpers/stargazers)
+[![Issues](https://img.shields.io/github/issues/texttree/translation-words-helpers.svg?style=for-the-badge)](https://github.com/texttree/translation-words-helpers/issues)
+[![MIT License](https://img.shields.io/github/license/texttree/translation-words-helpers.svg?style=for-the-badge)](https://github.com/texttree/translation-words-helpers/blob/master/LICENSE)
 
 <div align="center">
-  <a href="https://github.com/texttree/template-rcl">
-    <img src="https://github.com/texttree/template-rcl/raw/master/images/logo.svg" alt="Logo" width="256" height="256">
+  <a href="https://github.com/texttree/translation-words-helpers">
+    <img src="images/logo.png" alt="Logo" width="256" height="256">
   </a>
 </div>
 
-<h2><div align="center">project_title</div></h2>
+<h2><div align="center">translation-words-helpers</div></h2>
 <br />
 
-<center><strong><a href="https://template-rcl.netlify.app">Explore the docs and code playground »</a></strong></center>
-<br />
 <br />
 <center>
-  <a href="https://github.com/texttree/template-rcl/issues">Report Bug · </a>
-  <a href="https://github.com/texttree/template-rcl/issues">Request Feature</a>
+  <a href="https://github.com/texttree/translation-words-helpers/issues">Report Bug · </a>
+  <a href="https://github.com/texttree/translation-words-helpers/issues">Request Feature</a>
 </center>
 
 <br />
 <br />
 <details>
-  <summary>Table of Contents ↧</summary>
+  <summary>TABLE OF CONTENTS ↧</summary>
   <ul>
     <li>
       <a href="#about-the-project">About The Project</a>
@@ -52,26 +50,26 @@
 
 ## About The Project
 
-<img src="https://github.com/texttree/template-rcl/raw/master/images/screenshot.png" alt="Projector Mode RCL Shot" width="100%">
-
-Description
+The library allows you to mark repeated words in TSV Translation Words Links and TSV OBS Translation Words Links from git.door43 in your app.
 
 **Purpose**
+- mark repeated words in in TSV Translation Words Links and TSV OBS Translation Words Links for filtering
 
-- **Problem**
+**Problem**
+- in some verses there a many repeated words
 
-- **Scope**
+**Scope**
+- the library helps to mark and filter words for traslators in apps
 
-- **Background**
+**Background**
 
--
 
 <a style="text-align: right; display: block" href="#top">(back to top)</a>
 
 ### Built With
 
-- [React.js](https://reactjs.org/)
-- [React Styleguidist](https://react-styleguidist.js.org/)
+- JavaScript
+- [Webpack](https://webpack.js.org/)
 
 <a style="text-align: right; display: block" href="#top">(back to top)</a>
 
@@ -81,18 +79,18 @@ Description
 
 ### Installation
 
-Add the library to your React app
+Add the library to your app
 
 - yarn
 
 ```bash
-yarn add @texttree/template-rcl
+yarn add @texttree/translation-words-helpers
 ```
 
 - npm
 
 ```bash
-npm install @texttree/template-rcl
+npm install @texttree/translation-words-helpers
 ```
 
 <a style="text-align: right; display: block" href="#top">(back to top)</a>
@@ -103,15 +101,70 @@ npm install @texttree/template-rcl
 
 Example of usage
 
-_For more examples, please refer to the [Styleguidist link](https://template-rcl.netlify.app)_
+```
+const { data } = await axios(
+    'https://git.door43.org/unfoldingWord/en_obs-twl/raw/branch/master/twl_OBS.tsv'
+  )
+const json = tsvToJson(data)
+const markedWords = markRepeatedWords(json)
+```
+json will have this structure:
 
+```
+[
+  {
+    Reference: '1:1',
+    ID: 'aoaa',
+    Tags: 'keyterm',
+    OrigWords: 'God',
+    Occurrence: '1',
+    TWLink: 'rc://*/tw/dict/bible/kt/god'
+  },...
+]
+```
+and markedWords:
+
+```
+[
+  {
+    Reference: '1:1',
+    ID: 'aoaa',
+    Tags: 'keyterm',
+    OrigWords: 'God',
+    Occurrence: '1',
+    TWLink: 'rc://*/tw/dict/bible/kt/god',
+    isRepeatedInVerse: false
+  },
+```
+At default this function add mark just in verse, but you can change it if you add type ('chapter', 'book', 'all').
+For example:
+```
+const markedWords = markRepeatedWords(json, 'all')
+```
+returns
+```
+[...
+  {
+    Reference: '4:4',
+    ID: 'o16m',
+    Tags: 'keyterm',
+    OrigWords: 'bless',
+    Occurrence: '1',
+    TWLink: 'rc://*/tw/dict/bible/kt/bless',
+    isRepeatedInVerse: false,
+    isRepeatedInChapter: false,
+    isRepeatedInBook: true
+  },...
+]
+```
+Mor examples you can get from [tests](https://github.com/texttree/translation-words-helpers/__tests__).
 <a style="text-align: right; display: block" href="#top">(back to top)</a>
 
 <!-- ROADMAP -->
 
 ## Roadmap
 
-See the [open issues](https://github.com/texttree/template-rcl/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/texttree/translation-words-helpers/issues) for a full list of proposed features (and known issues).
 
 <a style="text-align: right; display: block" href="#top">(back to top)</a>
 
@@ -138,7 +191,7 @@ If you would like to fork the repo and create a pull request.
 
 ## License
 
-Distributed under the MIT License. See [LICENSE](https://github.com/texttree/template-rcl/blob/master/LICENSE) for more information.
+Distributed under the MIT License. See [LICENSE](https://github.com/texttree/translation-words-helpers/blob/master/LICENSE) for more information.
 
 <a style="text-align: right; display: block" href="#top">(back to top)</a>
 
@@ -146,7 +199,7 @@ Distributed under the MIT License. See [LICENSE](https://github.com/texttree/tem
 
 ## Contact
 
-Project Link: [https://github.com/texttree/template-rcl](https://github.com/texttree/template-rcl)
+Project Link: [https://github.com/texttree/translation-words-helpers](https://github.com/texttree/translation-words-helpers)
 
 <a style="text-align: right; display: block" href="#top">(back to top)</a>
 # translation-words-helpers
