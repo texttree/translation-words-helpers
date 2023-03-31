@@ -1,6 +1,6 @@
 const { markRepeatedWordsInVerse } = require('../markRepeatedWords')
 const { convertTsvsToListWords } = require('../convertTsvsToListWords')
-const { tsvs } = require('../../mocks/mocks')
+
 const markRepeatedWordsFromTsvs = (
   items,
   tsvs,
@@ -49,7 +49,7 @@ const markRepeatedWordsFromTsvs = (
         markedItem = {
           ...item,
           isRepeatedInChapter: conditions['chapter'],
-          isRepeatedInBook: conditions['book'],
+          isRepeatedInBook: conditions['book'] || conditions['chapter'],
         }
         break
       default:
