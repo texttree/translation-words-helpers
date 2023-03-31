@@ -6,6 +6,10 @@ const shortItems = tsvs[2][6].map((item) => ({
   Reference: item.Reference,
   TWLink: item.TWLink,
 }))
+const shortItems2 = tsvs[1][2].map((item) => ({
+  Reference: item.Reference,
+  TWLink: item.TWLink,
+}))
 
 describe('verse module', () => {
   test('try to mark in verse', () => {
@@ -176,7 +180,7 @@ describe('chapter module', () => {
   })
 })
 describe('book module', () => {
-  test('try to mark in book', () => {
+  test('1 try to mark in book', () => {
     expect(markRepeatedWordsFromTsvs(shortItems, tsvs, 'book')).toEqual([
       {
         Reference: '2:6',
@@ -211,6 +215,40 @@ describe('book module', () => {
       {
         Reference: '2:6',
         TWLink: 'rc://*/tw/dict/bible/kt/israel',
+        isRepeatedInBook: false,
+      },
+    ])
+  })
+  test('2 try to mark in book', () => {
+    expect(markRepeatedWordsFromTsvs(shortItems2, tsvs, 'book')).toEqual([
+      {
+        Reference: '1:2',
+        TWLink: 'rc://*/tw/dict/bible/names/abraham',
+        isRepeatedInBook: true,
+      },
+      {
+        Reference: '1:2',
+        TWLink: 'rc://*/tw/dict/bible/names/isaac',
+        isRepeatedInBook: false,
+      },
+      {
+        Reference: '1:2',
+        TWLink: 'rc://*/tw/dict/bible/names/isaac',
+        isRepeatedInBook: true,
+      },
+      {
+        Reference: '1:2',
+        TWLink: 'rc://*/tw/dict/bible/names/jacob',
+        isRepeatedInBook: false,
+      },
+      {
+        Reference: '1:2',
+        TWLink: 'rc://*/tw/dict/bible/names/jacob',
+        isRepeatedInBook: true,
+      },
+      {
+        Reference: '1:2',
+        TWLink: 'rc://*/tw/dict/bible/names/judah',
         isRepeatedInBook: false,
       },
     ])
