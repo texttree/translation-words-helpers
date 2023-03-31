@@ -157,7 +157,8 @@ returns
   },...
 ]
 ```
-Mor examples you can get from [tests](https://github.com/texttree/translation-words-helpers/tree/master/__tests__).
+More examples you can get from [tests](https://github.com/texttree/translation-words-helpers/tree/master/__tests__).
+
 <a style="text-align: right; display: block" href="#top">(back to top)</a>
 
 <!-- ROADMAP -->
