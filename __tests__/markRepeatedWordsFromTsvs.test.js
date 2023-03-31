@@ -1,8 +1,8 @@
 const { markRepeatedWordsFromTsvs } = require('../src/markRepeatedWordsFromTsvs/index')
-const { items, tsvs } = require('../mocks/mocks')
+const { tsvs } = require('../mocks/mocks')
 const { describe, expect, test } = require('@jest/globals')
 
-const shortItems = items.map((item) => ({
+const shortItems = tsvs[2][6].map((item) => ({
   Reference: item.Reference,
   TWLink: item.TWLink,
 }))
