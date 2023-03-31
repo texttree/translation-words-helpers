@@ -9,6 +9,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf dist && webpack --mode production --config webpack.prod.js",
+    "prepublishOnly": "rm -fr dist && yarn build",
     "test": "jest",
     "lint": "eslint ./src"
   },
