@@ -1,6 +1,6 @@
 {
   "name": "@texttree/translation-words-helpers",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "main": "dist/index.js",
   "files": [
     "dist/*"
@@ -9,6 +9,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf dist && webpack --mode production --config webpack.prod.js",
+    "prepublishOnly": "rm -fr dist && yarn build",
     "test": "jest",
     "lint": "eslint ./src"
   },
