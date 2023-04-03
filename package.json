@@ -1,6 +1,6 @@
 {
   "name": "@texttree/translation-words-helpers",
-  "version": "0.1.4",
+  "version": "0.2.4",
   "main": "dist/index.js",
   "files": [
     "dist/*"
@@ -16,6 +16,7 @@
   "devDependencies": {
     "@babel/core": "^7.21.3",
     "@babel/eslint-parser": "^7.21.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
     "babel-loader": "^9.1.2",
     "eslint": "^8.36.0",

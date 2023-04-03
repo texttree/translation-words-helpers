@@ -21,6 +21,9 @@ module.exports = {
         include: path.join(__dirname, 'src'),
         exclude: /node_modules/,
         loader: 'babel-loader',
+        options: {
+          plugins: ['@babel/plugin-proposal-optional-chaining'],
+        },
       },
     ],
   },
